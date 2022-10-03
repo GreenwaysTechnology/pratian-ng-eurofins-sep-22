@@ -1,0 +1,5 @@
+<div>
+    <h1>{{title}}</h1>
+    <!-- [propertyName]="value" -->
+   <app-userdetails (onUserRequest)="getData($event)"  [users]="users" [loading]="loading" [status]="status" ></app-userdetails>
+</div>

@@ -1,0 +1,986 @@
+
+Angular:
+
+Framework and platform for building user interface application(browser,mobile apps,desktop apps) 
+
+types of Browser based apps:
+............................
+
+1.SPA
+2.SSR
+3.SSG
+4.PWA
+
+SPA
+....
+
+Angular is built up on various tech stack
+
+1.HTML 5
+2.CSS 3
+3.ES 6 - Typescript
+4.rxjs
+
+HTML 5 Feature - custom elements
+<app-root>
+<app-user> 
+<h1>Hello</h1> ---->browser finds h1 and renders accordingly because it is built in
+<app-user>------|Attach js| write logic how to render---| browser understands that
+
+Programmer flow- ts view
+<app-user>--->Template--|part of component--->Component is ts --->Component is js
+
+angular is mvc,object oriented framework
+
+in angular everything is object.objects are created by angular automatically- ioc/dependency injection.
+
+objects in angular
+1.infra objects
+ component
+ module
+ service
+ directive
+ pipe
+
+infra objects are identified by decorators 
+
+2.domain objects
+eg users,orders,invoice - array , literal objects,primitives
+
+HTML apps are designed based on tree model.
+
+<body>
+  <div>
+	<div>	</div>
+	<div>
+	    <div>
+		<p>This is test </p>
+	    </div>
+
+	</div>
+	<div>
+     </div>
+
+  </div>
+
+</body>
+
+
+Custom elements view
+
+<body>
+  <app-root>  ---<div>
+	<app-header> </app-header> -div /header
+	<app-main> </app-main> -div
+	<app-footer> </app-footer> -div/footer
+ </app-root> ----</div>
+</body>
+
+main.ts----app.module.ts----app.component.ts
+ |        
+main.js    app.module.js-----app.component.js
+ 
+In angular every thing is object.
+in order to create object we need class
+
+class Myclass{
+
+}
+
+Decorators:
+@Component
+@NgModule
+@Directive
+@Pipe
+@Injectable
+@Input
+@Output
+etc...
+
+
+@Component()
+class Myclass{
+
+}
+
+objects classification
+1.view objects - declarations
+  component,directive,pipe
+ 
+2.module objects -imports
+  submodule -any class having @NgModule decorator
+3.service objects - providers
+  @Injectable
+................................................................................
+
+
+If you understand html hierachy, you can design app the same way. - Tree Model
+
+Layout:
+
+<div>
+ <header></header>
+ <div>
+   <section> </section>
+   <section> </section>
+ </div>
+ <footer></footer>
+</div>
+
+<app-root>
+<app-page> -Parent
+  <app-header>-child
+  </app-header>
+  <app-main>
+	<app-product></app-product>
+	<app-customer></app-customer>
+  </app-main>
+  <app-footer> -sibling
+  </app-footer>
+</app-page>
+</app-root>
+
+Folder structure:
+................
+src
+ |
+ app
+  |
+  app.component.ts
+  app.module.ts
+
+features based
+ src
+ |
+ app
+  |
+  app.component.ts
+  app.module.ts
+  layout
+    header
+    footer
+    body
+  users
+    |
+  customers
+   |
+  orders
+  invoice
+
+Module types:
+
+1.es 6 modules
+   Used to share code across the folders and files
+ export,export default,import
+
+2.angular modules
+
+  Used to group objects
+ main module
+   - other modules,app compoent
+ sub module
+   - can have its own submodule,components,diretives
+
+..........................
+
+.....................................................................................
+.........
+			  Angular coding best pratices -Angular Style Guide
+..............................................................................................
+https://angular.io/guide/styleguide
+
+File structure conventions:
+
+->file name must follow the domain model.
+
+product:
+ Ng has lot of infra objects (module,component,pipe,services...)
+
+component:
+ It has so many files
+ .ts file
+    component file
+    component spec file -  unit testing file
+ .html file
+ .css file
+
+header.component.ts | spec.ts | .html | .css
+
+header.component.ts
+header.component.html
+header.component.css
+header.component.spec.ts
+
+Modules
+ header.module.ts
+
+
+style guide for file names
+
+domainname.component|service|directive|pipe.ts
+hero.component.ts
+hero.service.ts
+hero.directive.ts
+hero.pipe.ts
+
+Custom elements Naming convention:Component selectors
+
+ <app-root> - recommended
+  
+ <approot>  - not recommended.
+
+Do use dashed-case or kebab-case for naming the element selectors of components.
+............................................................................................
+
+Template:
+ Collection html elements + angular instructions
+View :
+ Runtime representation of template - pure html
+
+angular instructions: 
+  some special symbols
+
+
+Component : state +methods + template
+
+Data binding:
+ Transfering state to view from the controller(component) and view to Controller
+
+Types of databinding
+
+1.interpolation
+2.property binding
+3.attribute binding
+4.event binding
+5.two way data binding
+6.class binding
+7.style binding
+
+
+Angular built in directives(for,if,switch) is part of two modules
+
+BrowserModule - built in directives + basic browser related api
+   this module should not be injected inside any sub modules
+CommonModule
+  It is dervied module from the BrowserModule which contains only built in directives
+
+MVC :
+
+..............................................................................
+
+Blocking
+  The application is waiting for something
+  Blocking wasts cpu,memory resources
+  It creates bad user experience.
+
+Non Blocking and async programming
+  Application dont need to wait for data,when ever data is available it can display ,mean time app can continue without blocking...
+
+js language lot of implmentations
+
+non blockiing is implmented with event driven model.
+
+
+two req:
+
+1.listener  - function which listens for data
+2.high level async api - which does not block the work flow.
+
+
+Styles of async:
+
+1.callback
+2.promise
+3.promise with async and await
+4.generators
+
+outside language
+5.reactive programming - rxjs
+
+Angular uses rxjs for advanced async programming
+....................................................................................
+				Component design principles
+
+Component Responsbility:
+
+Display view
+Get state from the service layer
+
+Here we dump the both responsiblity into single component.
+
+One component get state and another component should display view
+
+
+property binding:
+ passing data from parent component to child component
+
+<app-userdetails [propertyname]="propertyvalue"></app-userdetails>
+
+propertyvalue can be primitives,arrays,objects
+.....................................................................................
+
+Property binding,attribute binding,class,style binding:
+.......................................................
+[] -notation used by all these bindings
+
+on custom elements
+
+<app-userdetails [users]="users">
+ Here we send data dynamically from one cmp to another cmp.
+
+on html elements
+ ->regular html elements
+ ->css related attributes - class,style
+
+Attributes
+<div id="test" class="header" >
+<div hidden> - here no explicit value is assinged by default is false
+<div isEnabled>
+
+Attribute and []
+<div [isEnabled]="variable">
+<img src="logo.png"> - static image
+<img [src]="imageUrl">
+
+.....................................................................................
+
+Routing is a concept through which we can build an called Single Page Web App.
+
+We have lot of web apps
+
+1.static web app
+2.dynamic web app
+3.web services - soap,restfull
+4.spa
+
+SPA core concepts:
+
+spa is built using "js,css,html5"
+
+js offers browser apis
+-location
+-history
+ objects are used to implement navigation
+
+if you want to build spa using frameworks like angular , angular offers a separate module called "RouterModule"
+
+1.page
+  1.physical page - html page/static - index.html
+  2.virtual page - the page created onfly and inserted into pysical page- components/views
+
+index.html
+
+ <body>
+    <app-root></app-root>
+ </body>
+
+
+without spa
+
+ <body>
+    <app-root>
+		<app-users>
+    </app-root>
+ </body>
+
+
+
+with spa
+
+ <body>
+    <app-root>
+         <navigation>
+         <page>
+    </app-root>
+ </body>
+
+navigation would html hyper links - menus
+page is component to be rendered based on menuitem
+
+Witout routing:
+<div class="container">
+  <h1 style="text-align:center">Router Application</h1>
+  <app-home></app-home>
+  <app-contact></app-contact>
+</div>
+How to convert above into menu driven
+
+Common Objects In the Routing Module/Routing:
+
+1.RouterModule
+  To define route configuration
+which has two methods
+forRoot
+forChild
+
+
+Directives:
+2.RouterOutlet 
+	Acts as a placeholder that Angular dynamically fills based on the current router state.
+   <router-outlet>
+
+3.RouterLink And RouterLinkActive
+   RouterLink is directive to replace href .
+
+..
+Basic navigation flow:
+
+E:\session\pratian\eurofins\routerapp>ng g m home --module=app
+E:\session\pratian\eurofins\routerapp>ng g c home/home --flat --inline-css --skip-tests --module=home --export
+>ng g m contact --module=app
+>ng g c contact/contact --flat --inline-style --skip-tests --module=contact --export
+    
+app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
+
+//route configuration
+const routes: Routes = [
+  {
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+app.component.html
+<div class="container">
+  <h1 style="text-align:center">Router Application</h1>
+  <nav class="nav">
+    <ul class="nav-pills">
+      <li class="nav-item"><a routerLinkActive="nav-link active" routerLink="home">Home</a></li>
+      <li class="nav-item"><a routerLinkActive="nav-link active" routerLink="contact">Contact</a></li>
+    </ul>
+  </nav>
+  <hr>
+  <!-- Here we are going to display component -view -->
+  <router-outlet></router-outlet>
+</div>
+...................................................................................
+			index page configuration
+
+As soon as app is rendered, we need to display some basic page.
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
+
+//route configuration
+const routes: Routes = [
+  {
+    path: '', component: HomeComponent
+  },
+  {
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+..................................................................................
+		  How to display url as soon as page is rendered
+			   (URL redirection)
+
+	
+const routes: Routes = [
+  {
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
+  },
+  {
+    path: '', redirectTo: '/home', pathMatch: 'full'
+  }
+];
+
+....................................................................................
+			  Page Not Found - 404
+..................................................................................
+		
+
+ng g c pagenotfound --flat --inline-style --export  --module=app --skip-tests
+CREATE src/app/pagenotfound.component.html (27 bytes)
+CREATE src/app/pagenotfound.component.ts (269 bytes)
+UPDATE src/app/app.module.ts (741 bytes)
+
+
+ {
+    path: '**', component: PagenotfoundComponent
+  }
+.....
+/////////////////////////////////////////////////////////////////////////////////////
+			    Dynamic router
+....................................................................................
+
+/users/1
+
+  {
+    path: 'users/:id', component: UserlistComponent
+  },
+
+http://localhost:4200/users/12
+
+E:\session\IBM\2022\sep\ng-session\routingapp>ng g c users/user --flat --inline-style --export  --module=users --skip-tests
+CREATE src/app/users/user.component.html (19 bytes)
+CREATE src/app/users/user.component.ts (245 bytes)
+UPDATE src/app/users/users.module.ts (402 bytes)
+
+How to read routeParam inside component?
+
+ActivatedRoute:
+ It is built in service object , used to get information about current route inside component.
+This Object powered with Observable.
+
+
+http://localhost:4200/users/89
+
+import { Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { USERS } from './user-mock';
+import { User } from './user.type';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsersService {
+
+  constructor() { }
+
+  public getUsers(): Observable<User[]> {
+    return of(USERS)
+  }
+  public getUserById(id: number | string): Observable<User> {
+    return this.getUsers().pipe(
+      map((users: User[]) => users.find(user => user.id === +id)!)
+    )
+  }
+}
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserlistComponent } from './userlist.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { UserdetailsComponent } from './userdetails.component';
+
+
+
+@NgModule({
+  declarations: [
+    UserlistComponent,
+    UserdetailsComponent
+  ],
+  imports: [
+    CommonModule, AppRoutingModule
+  ],
+  exports: [
+    UserlistComponent,
+    UserdetailsComponent
+  ]
+})
+export class UsersModule { }
+..
+
+User List
+<div>
+    <h1>Users</h1>
+    <ul>
+        <li *ngFor="let user of users |async">
+            <span>
+                <a [routerLink]="['./details',user.id]">{{user.name}}</a>
+            </span>
+        </li>
+    </ul>
+</div>
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from './user.type';
+import { UsersService } from './users.service';
+
+@Component({
+  selector: 'app-userdetails',
+  templateUrl: './userdetails.component.html',
+  styles: [
+  ]
+})
+export class UserdetailsComponent implements OnInit {
+
+  id!: number
+  user!: Observable<User>
+  constructor(private route: ActivatedRoute, private userService: UsersService) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe({
+      next: params => {
+        console.log(params)
+        this.id = params['id']
+        this.user = this.userService.getUserById(this.id)
+      }
+    })
+  }
+
+}
+import { User } from "./user.type";
+
+export const USERS:Array<User> = [
+    {
+        "id": 1,
+        "name": "Dr.Nice",
+        "points": 98.343434
+    },
+    {
+        "id": 2,
+        "name": "Bombastor",
+        "points": 45.677755
+    },
+    {
+        "id": 3,
+        "name": "RubberMan",
+        "points": 23.6777
+    },
+    {
+        "id": 4,
+        "name": "Spider Man",
+        "points": 278.677
+    },
+    {
+        "id": 5,
+        "name": "Celeritas",
+        "points": 12.567
+    },
+    {
+        "id": 6,
+        "name": "Dynama",
+        "points": 34.5677
+    },
+    {
+        "id": 7,
+        "name": "Dr.IQ",
+        "points": 34.5677
+    },
+    {
+        "id": 8,
+        "name": "Magma",
+        "points": 12.567
+    },
+    {
+        "id": 9,
+        "name": "Iron Man",
+        "points": 123.56732
+    },
+    {
+        "id": 10,
+        "name": "Subramanian",
+        "points": 13.5672323
+    },
+   
+]
+
+export class User {
+    id!: number
+    name!: string
+    points?: any =0
+}
+....................................................................................
+				Nested routing
+....................................................................................
+
+E:\session\pratian\eurofins\routerapp>ng g c products/products --flat --inline-style --export  --module=products --skip-tests
+CREATE src/app/products/products.component.html (23 bytes)
+CREATE src/app/products/products.component.ts (257 bytes)
+UPDATE src/app/products/products.module.ts (317 bytes)
+
+E:\session\pratian\eurofins\routerapp>ng g c products/books --flat --inline-style --export  --module=products --skip-tests
+CREATE src/app/products/books.component.html (20 bytes)
+CREATE src/app/products/books.component.ts (248 bytes)
+UPDATE src/app/products/products.module.ts (409 bytes)
+
+E:\session\pratian\eurofins\routerapp>ng g c products/Electronics --flat --inline-style --export  --module=products --skip-tests
+CREATE src/app/products/electronics.component.html (26 bytes)
+CREATE src/app/products/electronics.component.ts (266 bytes)
+UPDATE src/app/products/products.module.ts (525 bytes)
+
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProductsComponent } from './products.component';
+import { BooksComponent } from './books.component';
+import { ElectronicsComponent } from './electronics.component';
+import { AppRoutingModule } from '../app-routing.module';
+
+
+
+@NgModule({
+  declarations: [
+    ProductsComponent,
+    BooksComponent,
+    ElectronicsComponent
+  ],
+  imports: [
+    CommonModule ,AppRoutingModule
+  ],
+  exports: [
+    ProductsComponent,
+    BooksComponent,
+    ElectronicsComponent
+  ]
+})
+export class ProductsModule { }
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styles: [
+  ]
+})
+export class ProductsComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+...
+<div class="container">
+  <h1 style="text-align:center">Router Application</h1>
+  <nav class="nav">
+    <ul class="nav-pills">
+      <li class="nav-item"><a routerLinkActive="nav-link active" routerLink="home">Home</a></li>
+      <li class="nav-item"><a routerLinkActive="nav-link active" routerLink="contact">Contact</a></li>
+      <li class="nav-item"><a routerLinkActive="nav-link active" routerLink="users">Users</a></li>
+      <li><a routerLinkActive="nav-link active" routerLink="products">Products</a></li>
+
+    </ul>
+  </nav>
+  <hr>
+  <!-- Here we are going to display component -view -->
+  <router-outlet></router-outlet>
+</div>
+
+  {
+    path: 'products', component: ProductsComponent,
+    children: [
+      { path: '', redirectTo: 'books', pathMatch: 'full' },
+      { path: 'books', component: BooksComponent },
+      { path: 'electronics', component: ElectronicsComponent }
+
+    ]
+  },
+.....................................................................................
+				Programmetic Routing
+
+Via code you can implement.
+
+Router Object:
+ It is built in object used to navigate to Other Routers
+
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styles: [
+  ]
+})
+export class DashboardComponent implements OnInit {
+
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+  }
+  gotToUsers() {
+    this.router.navigate(['users'])
+  }
+  goToProducts() {
+    this.router.navigate(['products'])
+  }
+
+}
+....................................................................................
+.....................................................................................
+				Modularizing Routing
+				  (Lazy Loading)
+
+.....................................................................................
+
+How to create a submodule with sub routing module?
+
+ng g m customers --route customers  --module=app
+
+CREATE src/app/customers/customers-routing.module.ts (355 bytes)
+CREATE src/app/customers/customers.module.ts (378 bytes)
+CREATE src/app/customers/customers.component.html (24 bytes)
+CREATE src/app/customers/customers.component.spec.ts (620 bytes)
+CREATE src/app/customers/customers.component.ts (287 bytes)
+CREATE src/app/customers/customers.component.css (0 bytes)
+UPDATE src/app/app-routing.module.ts (1707 bytes)          
+
+ng g m orders --route orders  --module app.module
+CREATE src/app/orders/orders-routing.module.ts (343 bytes)
+CREATE src/app/orders/orders.module.ts (357 bytes)
+CREATE src/app/orders/orders.component.html (21 bytes)
+CREATE src/app/orders/orders.component.spec.ts (599 bytes)
+CREATE src/app/orders/orders.component.ts (275 bytes)
+CREATE src/app/orders/orders.component.css (0 bytes)
+UPDATE src/app/app-routing.module.ts (1809 bytes)
+
+app.routing.module
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
+import { DashboardComponent } from './dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { PagenotfoundComponent } from './pagenotfound.component';
+import { BooksComponent } from './products/books.component';
+import { ElectronicsComponent } from './products/electronics.component';
+import { ProductsComponent } from './products/products.component';
+import { UserComponent } from './users/user.component';
+import { UserlistComponent } from './users/userlist.component';
+
+//routing rules: routing configuration/
+//when i click particular menu, which compoent should be displayed
+const routes: Routes = [
+  {
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
+  },
+  {
+    path: 'users', component: UserlistComponent
+  },
+  {
+    path: 'users/:id', component: UserComponent
+  },
+  {
+    path: 'dashboard', component: DashboardComponent
+  },
+  {
+    path: 'products', component: ProductsComponent,
+    children: [
+      { path: 'books', component: BooksComponent },
+      { path: 'electronics', component: ElectronicsComponent }
+    ]
+  },
+  {
+    path: 'yourhome', redirectTo: '/home', pathMatch: 'full'
+  },
+  { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+  {
+    path: '', redirectTo: '/home', pathMatch: 'full'
+  },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+  {
+    path: '**', component: PagenotfoundComponent
+  }
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+customers module
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { CustomersRoutingModule } from './customers-routing.module';
+import { CustomersComponent } from './customers.component';
+
+
+@NgModule({
+  declarations: [
+    CustomersComponent
+  ],
+  imports: [
+    CommonModule,
+    CustomersRoutingModule
+  ]
+})
+export class CustomersModule { }
+
+Orders:
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { OrdersRoutingModule } from './orders-routing.module';
+import { OrdersComponent } from './orders.component';
+
+
+@NgModule({
+  declarations: [
+    OrdersComponent
+  ],
+  imports: [
+    CommonModule,
+    OrdersRoutingModule
+  ]
+})
+export class OrdersModule { }
+
+app.component.html
+<div class="container">
+    <h1 class="text-center">Routing App</h1>
+    <hr>
+    <!-- Traditionally displayed -->
+    <!-- <app-home></app-home>
+    <app-contact></app-contact> -->
+    <!-- With routing -->
+    <nav>
+        <ul>
+            <li><a routerLinkActive="active" routerLink="home">Home</a></li>
+            <li><a routerLinkActive="active" routerLink="contact">Contact</a></li>
+            <li><a routerLinkActive="active" routerLink="users">Users</a></li>
+            <li><a routerLinkActive="active" routerLink="products">Products</a></li>
+            <li><a routerLinkActive="active" routerLink="customers">Customers</a></li>
+            <li><a routerLinkActive="active" routerLink="orders">Orders</a></li>
+            <li><a routerLinkActive="active" routerLink="dashboard">Dashboard</a></li>
+
+        </ul>
+    </nav>
+    <hr>
+    <router-outlet></router-outlet>
+
+</div>
+.....................................................................................
+What is lazy loading?
+
+  In Angular the whole app is bundled as single js file (bundle.js).
+
+if your app grows big, the bundle also going to be big. when you load your app firt time in browser, it loads all js files which even not necessary the momement you launch app.
+
+it want to spilt the bundle.js file into menu driven 
+  products related js  is a separate bundle , which is requested from the server when i click product menu first time, it starts caching the local browser.
+
+Test Lazy Loading is working or not?
+
+Open browser , check network tab.
+......................................................................................
+
+

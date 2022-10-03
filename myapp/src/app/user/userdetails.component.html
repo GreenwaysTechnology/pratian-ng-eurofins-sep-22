@@ -1,0 +1,12 @@
+ <!-- Spinner  -->
+ <div *ngIf="loading; else notLoading">
+    <h2>{{status}}</h2>
+</div>
+<ng-template #notLoading>
+    <div *ngFor="let user of users">
+        <p>Id {{user.id}}</p>
+        <p>Name {{user.name}}</p>
+        <p>Status {{user.status ? "Available" : "Not Available"}}</p>
+        <app-skills [skills]="user.skills" ></app-skills>
+    </div>
+</ng-template>

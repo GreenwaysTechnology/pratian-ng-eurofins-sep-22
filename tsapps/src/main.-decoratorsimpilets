@@ -1,0 +1,26 @@
+//decorators : meta programming.
+//isloate the code logic from main code.
+/**
+ * decorator is simple javascript function, having logic
+ * types of decorators
+ * -class level decorator
+ * -field level decorator
+ * -method level decorator
+ * 
+ * implmentation:
+ *  Decoarators are still experimental feature in js, so type script also adds decorators experimental mode with flag
+ */
+
+//decorator function
+function Course(target: any) {
+    console.log('target =>', target)
+    Object.defineProperty(target.prototype, "course", { value: 'Typescript' })
+}
+
+//decorator usage 
+@Course
+class Student {
+    constructor(public name: string = "") { }
+}
+let student = new Student("Subramanian") as any;
+console.log(student.name,student.course)

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "ES6",
+        "target": "ES6",
+        "outDir": "./build",
+        "watch": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "files": [
+        "src/main.ts"
+    ]
+}
